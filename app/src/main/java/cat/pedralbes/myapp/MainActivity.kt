@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val recyclerView = findViewById<RecyclerView>(R.id.list)
-        var mAdapter = MovieAdapter(getMovies(), this)
+        var mAdapter = MovieAdapter(getMovies())
         recyclerView.adapter = mAdapter
     }
 

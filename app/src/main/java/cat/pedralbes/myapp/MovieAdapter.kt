@@ -8,43 +8,33 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MovieAdapter(movies: ArrayList<Movie>, context: Context) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
-    lateinit var data: ArrayList<Movie>
-    lateinit var context: Context
+    inner class ViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
 
-    // Constructor
-    fun MovieAdapter(data : ArrayList<Movie>,context: Context ){
-        this.data = data
-        this.context = context;
+        val photoMovie = itemView.findViewById<ImageView>(R.id.image)
+        val titleMovie : TextView = itemView.findViewById<TextView>(R.id.title)
     }
 
     // Replace the contents of a view (invoked by the layout manager)
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieAdapter.ViewHolder, position: Int) {
+        val movie:Movie = movies.get(position)
+        holder.titleMovie.text = movie.name;
+        holder.photoMovie.setImageResource(movie.photo)
 
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-        viewHolder.bind(data[position], context)
     }
 
     // Create new views (invoked by the layout manager)
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.ViewHolder {
         // Create a new view, which defines the UI of the list item
-        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item, viewGroup, false)
-
-        return ViewHolder(view)
+        val context = parent?.context;
+        val inflater = LayoutInflater.from(context)
+        val viewMovie = inflater.inflate(R.layout.item, parent, false)
+        return ViewHolder(viewMovie)
     }
 
     // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = data.size
-
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title = view.findViewById(R.id.title) as TextView
-        val photo = view.findViewById(R.id.image) as ImageView
-
-        fun bind(movie: Movie, context: Context) {
-            title.text = movie.name
-            photo.setBackgroundResource(movie.photo)
-        }
+    override fun getItemCount(): Int {
+        return movies.size
     }
 }
