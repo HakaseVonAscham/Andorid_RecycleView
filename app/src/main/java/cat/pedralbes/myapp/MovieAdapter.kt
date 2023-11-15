@@ -1,6 +1,5 @@
 package cat.pedralbes.myapp
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,8 @@ class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<Movie
 
     inner class ViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
 
-        val photoMovie = itemView.findViewById<ImageView>(R.id.image)
-        val titleMovie : TextView = itemView.findViewById<TextView>(R.id.title)
+        val photoMovie = itemView.findViewById<ImageView>(R.id.MovieImage)
+        val titleMovie : TextView = itemView.findViewById<TextView>(R.id.MovieTitle)
     }
 
     // Replace the contents of a view (invoked by the layout manager)
